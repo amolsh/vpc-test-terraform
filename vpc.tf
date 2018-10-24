@@ -13,11 +13,23 @@ resource "aws_vpc" "pet_vpc" {
 }
 
 resource "aws_subnet" "pub_subnet" {
-    count = 1
     vpc_id = "${aws_vpc.pet_vpc.id}"
-    cidr_block = "${var.pub_subnet_cidr}"
+    cidr_block = "${var.pub_subnet1_cidr}"
     map_public_ip_on_launch = true
-    availability_zone = "us-west-2a"
+    availability_zone = "us-east-1a"
+
+    tags {
+        Name = "pub-subnet"
+        owner = "shendea"
+        environment = "test"
+    }
+}
+
+resource "aws_subnet" "pub_subnet2" {
+    vpc_id = "${aws_vpc.pet_vpc.id}"
+    cidr_block = "${var.pub_subnet2_cidr}"
+    map_public_ip_on_launch = true
+    availability_zone = "us-east-1b"
 
     tags {
         Name = "pub-subnet"
@@ -30,7 +42,7 @@ resource "aws_subnet" "priv_subnet" {
     vpc_id = "${aws_vpc.pet_vpc.id}"
     cidr_block = "${var.priv_subnet_cidr}"
     map_public_ip_on_launch = true
-    availability_zone = "us-west-2a"
+    availability_zone = "us-east-1a"
 
     tags {
         Name = "priv-subnet"
@@ -64,8 +76,14 @@ resource "aws_route_table" "pub_rt" {
 }
 
 resource "aws_route_table_association" "pub_rt_association" {
-    #vpc_id = "${aws_vpc.pet_vpc.id}"
-    subnet_id = "{aws_subnet.pub_subnet.id}"
+    depends_on = ["aws_subnet.pub_subnet","aws_route_table.pub_rt"]
+    subnet_id = "${aws_subnet.pub_subnet.id}"
+    route_table_id = "${aws_route_table.pub_rt.id}"
+}
+
+resource "aws_route_table_association" "pub2_rt_association" {
+    depends_on = ["aws_subnet.pub_subnet2","aws_route_table.pub_rt"]
+    subnet_id = "${aws_subnet.pub_subnet2.id}"
     route_table_id = "${aws_route_table.pub_rt.id}"
 }
 

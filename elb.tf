@@ -24,7 +24,7 @@ resource "aws_alb_target_group" "pet-alb-tg" {
 
 resource "aws_alb" "pet_alb" {
     name            = "pet-alb"
-    subnets         = ["${aws_subnet.pub_subnet.*.id}"]
+    subnets         = ["${aws_subnet.pub_subnet.*.id}","${aws_subnet.pub_subnet2.*.id}"]
     security_groups = ["${aws_security_group.pet_elbs.id}"]
     idle_timeout = 400
     tags {

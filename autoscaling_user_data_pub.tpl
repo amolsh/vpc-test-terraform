@@ -13,13 +13,13 @@ sudo apt install oracle-java8-set-default -y
 wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
 echo deb https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list
 sudo apt-get update
-sudo apt-get install git
-sudo apt-get install jenkins
+sudo apt-get install git -y
+sudo apt-get install jenkins -y
 sudo systemctl start jenkins
 sudo apt-add-repository ppa:ansible/ansible
 sudo apt-get update
-sudo apt-get install ansible
+sudo apt-get install ansible -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 sudo apt update
-sudo apt install docker-ce
+sudo apt install docker-ce -y

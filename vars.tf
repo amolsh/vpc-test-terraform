@@ -1,13 +1,13 @@
 
 
 variable "aws_region" {
-    default = "us-west-2"
+    default = "us-east-1"
     description = "Determine AWS region endpoint to access."
 }
 
 /* ECS optimized AMIs per region */
 variable "image_id" {
-  default =  "ami-0bbe6b35405ecebdb"
+  default =  "ami-0ac019f4fcb7cb7e6" #"ami-0bbe6b35405ecebdb"
 }
 
 
@@ -27,12 +27,16 @@ variable "instance_type" {
 }
 
 
-variable "pub_subnet_cidr" {
+variable "pub_subnet1_cidr" {
     default = "10.0.1.0/24"
 }
 
-variable "priv_subnet_cidr" {
+variable "pub_subnet2_cidr" {
     default = "10.0.2.0/24"
+}
+
+variable "priv_subnet_cidr" {
+    default = "10.0.3.0/24"
 }
 
 variable "subnet_azs" {
