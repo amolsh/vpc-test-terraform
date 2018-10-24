@@ -6,7 +6,7 @@ resource "aws_alb_target_group" "pet-alb-tg" {
     vpc_id   = "${aws_vpc.pet_vpc.id}"
 
     health_check {
-        matcher = "200,302,303,301"
+        matcher = "200,302,303,301,403"
         timeout = 20
         unhealthy_threshold = 5
     }

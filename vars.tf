@@ -5,9 +5,8 @@ variable "aws_region" {
     description = "Determine AWS region endpoint to access."
 }
 
-/* ECS optimized AMIs per region */
 variable "image_id" {
-  default =  "ami-0ac019f4fcb7cb7e6" #"ami-0bbe6b35405ecebdb"
+  default =  "ami-0ac019f4fcb7cb7e6" 
 }
 
 
